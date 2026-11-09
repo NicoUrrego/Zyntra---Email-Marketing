@@ -1,0 +1,215 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Outfit:wght@600&family=Space+Grotesk:wght@700&display=swap");
+
+.contact {
+  --teal: #119da4;
+  --deep: #19647e;
+  --ink: #030301;
+  --mint: #0fff95;
+  --paper: #f2f2f2;
+  --danger: #ff7a7a;
+
+  position: relative;
+  padding: clamp(48px, 8vw, 112px) clamp(20px, 5vw, 64px);
+  background:
+    radial-gradient(60% 55% at 24% 50%, rgba(17, 157, 164, 0.16), transparent 70%),
+    var(--ink);
+  color: var(--paper);
+  font-family: "DM Sans", system-ui, sans-serif;
+  overflow: hidden;
+}
+
+.contact__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(24px, 5vw, 72px);
+  align-items: center;
+}
+
+/* Orbe animado */
+.contact__orb {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 1 / 1;
+  justify-self: center;
+}
+
+.orb-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Panel del formulario */
+.contact__panel {
+  padding: clamp(24px, 3.5vw, 44px);
+  border: 1px solid rgba(17, 157, 164, 0.35);
+  border-radius: 24px;
+  background: rgba(242, 242, 242, 0.035);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.contact__title {
+  margin: 0 0 10px;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.contact__lead {
+  margin: 0 0 28px;
+  max-width: 42ch;
+  color: rgba(242, 242, 242, 0.72);
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.contact__form {
+  display: grid;
+  gap: 20px;
+}
+
+.contact__field {
+  display: grid;
+  gap: 8px;
+}
+
+.contact__field label {
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.contact__field input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  border: 1px solid rgba(242, 242, 242, 0.16);
+  border-radius: 14px;
+  background: rgba(242, 242, 242, 0.05);
+  color: var(--paper);
+  font: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.contact__field input::placeholder {
+  color: rgba(242, 242, 242, 0.38);
+}
+
+.contact__field input:focus {
+  outline: none;
+  border-color: var(--mint);
+  background: rgba(242, 242, 242, 0.08);
+  box-shadow: 0 0 0 3px rgba(15, 255, 149, 0.18);
+}
+
+.contact__field input[aria-invalid="true"] {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px rgba(255, 122, 122, 0.16);
+}
+
+.contact__error {
+  margin: 0;
+  color: var(--danger);
+  font-size: 0.88rem;
+}
+
+/* Campo trampa anti-bots */
+.contact__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.contact__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 28px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--mint);
+  color: var(--ink);
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.25s ease, opacity 0.2s ease;
+}
+
+.contact__submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(15, 255, 149, 0.28);
+}
+
+.contact__submit:focus-visible {
+  outline: 3px solid var(--paper);
+  outline-offset: 3px;
+}
+
+.contact__submit:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.contact__spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(3, 3, 1, 0.25);
+  border-top-color: var(--ink);
+  border-radius: 50%;
+  animation: contact-spin 0.7s linear infinite;
+}
+
+@keyframes contact-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.contact__status {
+  min-height: 1.4em;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.contact__status--success {
+  color: var(--mint);
+}
+
+.contact__status--error {
+  color: var(--danger);
+}
+
+/* Responsive */
+@media (max-width: 860px) {
+  .contact__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .contact__orb {
+    order: -1;
+    max-width: 340px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__spinner {
+    animation-duration: 2s;
+  }
+
+  .contact__submit,
+  .contact__field input {
+    transition: none;
+  }
+}
